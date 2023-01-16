@@ -1,0 +1,11 @@
+﻿
+@{
+    ViewData["Title"] = "EditCateg";
+}
+
+<h1>EditCateg</h1>
+<form method="post" action="SaveCategEdit">
+    <input type="hidden" name="id" value="@ViewBag.Category.Id" />
+    <label>Category Name:<input type="text" name="CategName" value="@ViewBag.Category.CategName" /></label>
+    <button type="submit">Save Changes</button>
+</form>

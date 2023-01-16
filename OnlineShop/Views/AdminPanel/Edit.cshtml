@@ -1,0 +1,29 @@
+﻿
+@{
+    ViewData["Title"] = "Edit";
+}
+<h2>Edit Product!</h2>
+<form method="post" enctype="multipart/form-data" asp-action="SaveEdits">
+    <input name="Id" hidden value="@ViewBag.Product.Id" />
+    <label>Product Name:<input name="ProdName" type="text" value="@ViewBag.Product.ProdName" /></label>
+    <label>Product Price:<input name="ProdPrice" type="number" value="@ViewBag.Product.Price" /></label>
+    <label>Product Amount:<input name="ProdAmount" type="number" value="@ViewBag.Product.Amount"/></label>
+    <label>
+        Select the Category:
+        <select name="CategId">
+            @foreach (var item in ViewBag.Categ)
+            {
+                @if (item.Id == ViewBag.Product.IdCategorie)
+                {
+                    <option value="@item.Id" selected>@item.CategName</option>
+                }
+                else
+                {
+                    <option value="@item.Id">@item.CategName</option>
+                }
+            }
+        </select>
+    </label>
+    <label>Description:<textarea name="description">@ViewBag.Product.Description</textarea></label>
+    <button type="submit">Save Changes</button>
+</form>

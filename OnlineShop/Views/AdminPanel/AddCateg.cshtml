@@ -1,0 +1,11 @@
+﻿
+@{
+    ViewData["Title"] = "AddCateg";
+}
+
+<h1>AddCateg</h1>
+<form method="post" asp-action="SaveCateg">
+    <input @ViewBag.Id name="Id" type="hidden"/>
+<label>Category Name:<input type="text" name="CategName"/></label>
+<button type="submit">Save</button>
+</form>

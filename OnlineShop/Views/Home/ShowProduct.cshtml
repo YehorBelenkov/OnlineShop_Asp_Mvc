@@ -1,0 +1,120 @@
+﻿@{
+    ViewData["Title"] = "ShowProduct";
+}
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+<style>
+    .flexing {
+        display: flex;
+    }
+
+    .img {
+    }
+
+    @@import 'https://fonts.googleapis.com/css?family=Roboto';
+
+    body {
+        background: #e2eaef;
+        font-family: "Open Sans", sans-serif;
+    }
+    .side-menu {
+        z-index: 1;
+        font-family: 'Roboto', sans-serif;
+        position: fixed;
+        top: 0;
+        left: 0;
+        margin: 0;
+        padding: 0;
+        height: 100%;
+        width: 60px;
+        list-style-type: none;
+        background: linear-gradient(green,lime,green,white);
+        overflow: hidden;
+        transition: width .3s;
+    }
+
+        .side-menu:hover {
+            width: 300px;
+        }
+
+        .side-menu li {
+            width: 300px;
+        }
+
+            .side-menu li span {
+                font-size: 1rem;
+                margin: 20px 30px 0 22px;
+            }
+
+            .side-menu li a {
+                display: block;
+                font-size: .9rem;
+                text-decoration: none;
+                color: #FFF;
+                height: 60px;
+            }
+
+                .side-menu li a:hover {
+                    background: #14081d;
+                    display: block;
+                }
+</style>
+<ul class="side-menu" onmouseover="showOs()" onmouseout="hideOs()">
+    <center><h1 id="OS">OS</h1></center>
+    @if (ViewBag.User != null)
+    {
+        @if (ViewBag.User.Id == 1)
+        {
+            <form method="get" style="padding:0; margin:0;">
+            <li><a asp-controller="AdminPanel" asp-action="ProductList"><span class="fa fa-code"></span>Admin Panel</a></li>
+            </form>
+        }
+        <form method="get" style="padding:0; margin:0;">
+        <li><a asp-controller="Home" asp-action="Index"><span class="fa fa-shopping-bag"></span>Shop</a></li>
+        </form>
+        <form method="get" style="padding:0; margin:0;">
+        <li><a asp-controller="Cart" asp-action="CartList"><span class="fa fa-shopping-cart"></span>Cart</a></li>
+        </form>
+        <form method="get" style="padding:0; margin:0;">
+        <li><a asp-action="logout"><span class="fa fa-sign-out"></span>Logout</a></li>
+        </form>
+    }
+    else
+    {
+        <form method="get" style="padding:0; margin:0;">
+        <li><a asp-controller="Home" asp-action="Index"><span class="fa fa-shopping-bag"></span>Shop</a></li>
+        </form>
+        <form method="get" style="padding:0; margin:0;">
+        <li><a asp-action="LoginRegister"><span class="fa fa-user"></span>Register/Login</a></li>
+        </form>
+    }
+</ul>
+<script>
+    function hideOs() {
+        document.getElementById("OS").innerText = "OS";
+    }
+    function showOs() {
+        document.getElementById("OS").innerText = "Online Shop";
+    }
+</script>
+<center>
+    <h1>Cart</h1>
+</center>
+<div class="flexing" style="margin-left:430px; background-color:white; padding:20px; width:650px;">
+    <div style="margin:20px;">
+        <img style="width:330px; height:430px;" src="@ViewBag.Product.HttpPathImg" />
+    </div>
+    <div style="margin:20px;">
+        <h1>@ViewBag.Product.ProdName</h1>
+        <p>@ViewBag.Product.Description</p>
+        <hr />
+        <label style="float:right">Last Price<h3 style="color:gray;"><strike>$@ViewBag.Cut</strike></h3></label>
+        <label>Current Price<h3>$@ViewBag.Product.Price</h3></label>
+
+        <form method="post" asp-action="AddToCart">
+            <input type="hidden" value="@ViewBag.Product.Id" name="prodId"/>
+            <label>Amount:<input value="1" type="number" max="@ViewBag.Product.Amount" name="amount"/></label>
+            <button class="btn btn-primary">Add to Cart</button>
+        </form>
+    </div>
+</div>

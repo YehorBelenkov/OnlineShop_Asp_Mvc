@@ -1,0 +1,286 @@
+﻿@{
+    ViewData["Title"] = "ProductList";
+}
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+<style>
+    @@import 'https://fonts.googleapis.com/css?family=Roboto';
+
+    body {
+        background: #e2eaef;
+        font-family: "Open Sans", sans-serif;
+    }
+
+    .side-menu {
+        z-index: 1;
+        font-family: 'Roboto', sans-serif;
+        position: fixed;
+        top: 0;
+        left: 0;
+        margin: 0;
+        padding: 0;
+        height: 100%;
+        width: 60px;
+        list-style-type: none;
+        background: linear-gradient(green,lime,green,white);
+        overflow: hidden;
+        transition: width .3s;
+    }
+
+        .side-menu:hover {
+            width: 300px;
+        }
+
+        .side-menu li {
+            width: 300px;
+        }
+
+            .side-menu li span {
+                font-size: 1rem;
+                margin: 20px 30px 0 22px;
+            }
+
+            .side-menu li a {
+                display: block;
+                font-size: .9rem;
+                text-decoration: none;
+                color: #FFF;
+                height: 60px;
+            }
+
+                .side-menu li a:hover {
+                    background: #14081d;
+                    display: block;
+                }
+
+    .flexing {
+        display: flex;
+    }
+    .row {
+        margin-top: 40px;
+        padding: 0 10px;
+    }
+
+    .clickable {
+        cursor: pointer;
+    }
+
+    .panel-heading div {
+        margin-top: -18px;
+        font-size: 15px;
+    }
+
+        .panel-heading div span {
+            margin-left: 5px;
+        }
+
+    .panel-body {
+        display: none;
+    }
+    .flexing{
+        display:flex;
+        padding:10px;
+        
+    }
+</style>
+<ul class="side-menu" onmouseover="showOs()" onmouseout="hideOs()">
+    <center><h1 id="OS">OS</h1></center>
+    @if (ViewBag.User != null)
+    {
+        @if (ViewBag.User.Id == 1)
+        {
+            <form method="get" style="padding:0; margin:0;">
+            <li><a asp-controller="AdminPanel" asp-action="ProductList"><span class="fa fa-code"></span>Admin Panel</a></li>
+            </form>
+        }
+        <form method="get" style="padding:0; margin:0;">
+        <li><a asp-controller="Home" asp-action="Index"><span class="fa fa-shopping-bag"></span>Shop</a></li>
+        </form>
+        <form method="get" style="padding:0; margin:0;">
+        <li><a asp-controller="Cart" asp-action="CartList"><span class="fa fa-shopping-cart"></span>Cart</a></li>
+        </form>
+        <form method="get" style="padding:0; margin:0;">
+        <li><a asp-action="logout"><span class="fa fa-sign-out"></span>Logout</a></li>
+        </form>
+    }
+    else
+    {
+        <form method="get" style="padding:0; margin:0;">
+        <li><a asp-controller="Home" asp-action="Index"><span class="fa fa-shopping-bag"></span>Shop</a></li>
+        </form>
+        <form method="get" style="padding:0; margin:0;">
+        <li><a asp-action="LoginRegister"><span class="fa fa-user"></span>Register/Login</a></li>
+        </form>
+    }
+</ul>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+<div style="margin-left:100px;" class="flexing">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-6" style="width:auto;">
+                <div class="panel panel-primary">
+                    <div class="panel-heading">
+                        <h3 class="panel-title">Developers</h3>
+                        <div class="pull-right">
+                            <span class="clickable filter" data-toggle="tooltip" title="Toggle table filter" data-container="body">
+                                <i class="glyphicon glyphicon-filter"></i>
+                            </span>
+                        </div>
+                    </div>
+                    <div class="panel-body">
+                        <input type="text" class="form-control" id="dev-table-filter" data-action="filter" data-filters="#dev-table" placeholder="Filter Developers" />
+                    </div>
+                    <table class="table table-hover" id="dev-table">
+                        <thead>
+                            <tr>
+                                <th>ID</th>
+                                <th>Product Name</th>
+                                <th>Price</th>
+                                <th>Amount</th>
+                                <th>Category</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var item in ViewBag.Products)
+                            {
+                                <tr>
+                                    <td>@item.Id</td>
+                                    <td>@item.ProdName</td>
+                                    <td>@item.Price</td>
+                                    <td>@item.Amount</td>
+                                    @foreach (var Category in ViewBag.Category)
+                                    {
+                                        @if (Category.Id == item.IdCategorie)
+                                        {
+                                            <td>@Category.CategName</td>
+                                        }
+                                    }
+                                    <td>
+                                        <form method="post" asp-action="Edit">
+                                            <input hidden name="id" value="@item.Id" />
+                                            <button>Edit</button>
+                                        </form>
+                                    </td>
+                                    <td>
+                                        <form method="post" asp-action="delete">
+                                            <input type="text" hidden value="@item.Id" name="id">
+                                            <button type="submit">Delete</button>
+                                        </form>
+                                    </td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+        <form method="post" asp-action="Add">
+            <button type="submit">Add Product</button>
+        </form>
+    </div>
+    <div class="container">
+        <div class="row">
+            <div class="col-md-6">
+                <div class="panel panel-primary">
+                    <div class="panel-heading">
+                        <h3 class="panel-title">Developers</h3>
+                        <div class="pull-right">
+                            <span class="clickable filter" data-toggle="tooltip" title="Toggle table filter" data-container="body">
+                                <i class="glyphicon glyphicon-filter"></i>
+                            </span>
+                        </div>
+                    </div>
+                    <div class="panel-body">
+                        <input type="text" class="form-control" id="dev-table-filter" data-action="filter" data-filters="#dev-table" placeholder="Filter Developers" />
+                    </div>
+                    <table class="table table-hover" id="dev-table">
+                        <thead>
+                            <tr>
+                                <th>ID</th>
+                                <th>Category Name</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var item in ViewBag.Category)
+                            {
+                                <tr>
+                                    <td>@item.Id</td>
+                                    <td>@item.CategName</td>
+                                    <td>
+                                        <form method="post" asp-action="EditCateg">
+                                            <input hidden name="id" value="@item.Id" />
+                                            <button>Edit</button>
+                                        </form>
+                                    </td>
+                                    <td>
+                                        <form method="post" asp-action="deleteCateg">
+                                            <input type="text" hidden value="@item.Id" name="id">
+                                            <button type="submit">Delete</button>
+                                        </form>
+                                    </td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+        <form method="post" action="AddCateg">
+            <button type="submit">Add Category</button>
+        </form>   
+    </div>
+</div>
+
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+<script>
+    (function () {
+        'use strict';
+        var $ = jQuery;
+        $.fn.extend({
+            filterTable: function () {
+                return this.each(function () {
+                    $(this).on('keyup', function (e) {
+                        $('.filterTable_no_results').remove();
+                        var $this = $(this),
+                            search = $this.val().toLowerCase(),
+                            target = $this.attr('data-filters'),
+                            $target = $(target),
+                            $rows = $target.find('tbody tr');
+
+                        if (search == '') {
+                            $rows.show();
+                        } else {
+                            $rows.each(function () {
+                                var $this = $(this);
+                                $this.text().toLowerCase().indexOf(search) === -1 ? $this.hide() : $this.show();
+                            })
+                            if ($target.find('tbody tr:visible').size() === 0) {
+                                var col_count = $target.find('tr').first().find('td').size();
+                                var no_results = $('<tr class="filterTable_no_results"><td colspan="' + col_count + '">No results found</td></tr>')
+                                $target.find('tbody').append(no_results);
+                            }
+                        }
+                    });
+                });
+            }
+        });
+        $('[data-action="filter"]').filterTable();
+    })(jQuery);
+
+    $(function () {
+        // attach table filter plugin to inputs
+        $('[data-action="filter"]').filterTable();
+
+        $('.container').on('click', '.panel-heading span.filter', function (e) {
+            var $this = $(this),
+                $panel = $this.parents('.panel');
+
+            $panel.find('.panel-body').slideToggle();
+            if ($this.css('display') != 'none') {
+                $panel.find('.panel-body input').focus();
+            }
+        });
+        $('[data-toggle="tooltip"]').tooltip();
+    })
+</script>

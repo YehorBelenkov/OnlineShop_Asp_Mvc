@@ -1,0 +1,24 @@
+﻿@{
+    ViewData["Title"] = "Add";
+}
+
+<form method="post" enctype="multipart/form-data" asp-action="Save">
+    <input name="Id" hidden />
+    <label>Product Name:<input name="ProdName" type="text" /></label>
+    <label>Product Price:<input name="ProdPrice" type="number" /></label>
+    <label>Product Amount:<input name="ProdAmount" type="number"/></label>
+    <label>
+        Select the Category:
+        <select name="CategId">
+            @foreach (var item in ViewBag.Categ)
+            {
+                <option value="@item.Id">@item.CategName</option>
+            }
+        </select>
+    </label>
+    <br />
+    <label>Http Image:<input type="text" name="http" /></label>
+    <label>Description: <textarea name="description"></textarea></label>
+    <button type="submit">Save Changes</button>
+</form>
+

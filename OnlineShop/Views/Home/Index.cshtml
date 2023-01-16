@@ -1,0 +1,641 @@
+﻿@{
+    ViewData["Title"] = "Home Page";
+}
+
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto|Open+Sans">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<style>
+    body {
+        background: #e2eaef;
+        font-family: "Open Sans", sans-serif;
+    }
+
+    h2 {
+        color: #000;
+        font-size: 26px;
+        font-weight: 300;
+        text-align: center;
+        text-transform: uppercase;
+        position: relative;
+        margin: 30px 0 60px;
+    }
+
+        h2::after {
+            content: "";
+            width: 100px;
+            position: absolute;
+            margin: 0 auto;
+            height: 4px;
+            border-radius: 1px;
+            background: #7ac400;
+            left: 0;
+            right: 0;
+            bottom: -20px;
+        }
+
+    .carousel {
+        margin: 50px auto;
+        padding: 0 70px;
+    }
+
+        .carousel .item {
+            color: #747d89;
+            min-height: 325px;
+            text-align: center;
+            overflow: hidden;
+        }
+
+        .carousel .thumb-wrapper {
+            padding: 25px 15px;
+            background: #fff;
+            border-radius: 6px;
+            text-align: center;
+            position: relative;
+            box-shadow: 0 2px 3px rgba(0,0,0,0.2);
+        }
+
+    .thumb-wrapper:hover {
+        background-color: mediumpurple;
+    }
+
+    .carousel .item .img-box {
+        height: 120px;
+        margin-bottom: 20px;
+        width: 100%;
+        position: relative;
+    }
+
+    .carousel .item img {
+        max-width: 100%;
+        max-height: 100%;
+        display: inline-block;
+        position: absolute;
+        bottom: 0;
+        margin: 0 auto;
+        left: 0;
+        right: 0;
+    }
+
+    .carousel .item h4 {
+        font-size: 18px;
+    }
+
+    .carousel .item h4, .carousel .item p, .carousel .item ul {
+        margin-bottom: 5px;
+    }
+
+    .carousel .thumb-content .btn {
+        color: #7ac400;
+        font-size: 11px;
+        text-transform: uppercase;
+        font-weight: bold;
+        background: none;
+        border: 1px solid #7ac400;
+        padding: 6px 14px;
+        margin-top: 5px;
+        line-height: 16px;
+        border-radius: 20px;
+    }
+
+        .carousel .thumb-content .btn:hover, .carousel .thumb-content .btn:focus {
+            color: #fff;
+            background: #7ac400;
+            box-shadow: none;
+        }
+
+        .carousel .thumb-content .btn i {
+            font-size: 14px;
+            font-weight: bold;
+            margin-left: 5px;
+        }
+
+    .carousel .carousel-control {
+        height: 44px;
+        width: 40px;
+        background: #7ac400;
+        margin: auto 0;
+        border-radius: 4px;
+        opacity: 0.8;
+    }
+
+        .carousel .carousel-control:hover {
+            background: #78bf00;
+            opacity: 1;
+        }
+
+        .carousel .carousel-control i {
+            font-size: 36px;
+            position: absolute;
+            top: 50%;
+            display: inline-block;
+            margin: -19px 0 0 0;
+            z-index: 5;
+            left: 0;
+            right: 0;
+            color: #fff;
+            text-shadow: none;
+            font-weight: bold;
+        }
+
+    .carousel .item-price {
+        font-size: 13px;
+        padding: 2px 0;
+    }
+
+        .carousel .item-price strike {
+            opacity: 0.7;
+            margin-right: 5px;
+        }
+
+    .carousel .carousel-control.left i {
+        margin-left: -2px;
+    }
+
+    .carousel .carousel-control.right i {
+        margin-right: -4px;
+    }
+
+    .carousel .carousel-indicators {
+        bottom: -50px;
+    }
+
+    .carousel-indicators li, .carousel-indicators li.active {
+        width: 10px;
+        height: 10px;
+        margin: 4px;
+        border-radius: 50%;
+        border: none;
+    }
+
+    .carousel-indicators li {
+        background: rgba(0, 0, 0, 0.2);
+    }
+
+        .carousel-indicators li.active {
+            background: rgba(0, 0, 0, 0.6);
+        }
+
+    .carousel .wish-icon {
+        position: absolute;
+        right: 10px;
+        top: 10px;
+        z-index: 99;
+        cursor: pointer;
+        font-size: 16px;
+        color: #abb0b8;
+    }
+
+        .carousel .wish-icon .fa-heart {
+            color: #ff6161;
+        }
+
+    .star-rating li {
+        padding: 0;
+    }
+
+    .star-rating i {
+        font-size: 14px;
+        color: #ffc000;
+    }
+
+    .search {
+        display: block;
+        text-align: center;
+    }
+
+    #fastsearch {
+        border-radius: 5px 0 0 5px;
+        height: 25px;
+        margin-right: -5px;
+    }
+
+    .col-sm-3 {
+        margin-top: 20px;
+        margin-bottom: 5px;
+    }
+    /*----------*/
+    #wrapper {
+        width: 100px;
+        margin: 0 auto;
+        background: #fff;
+        padding: 20px;
+        border: 10px solid #aaa;
+        border-radius: 15px;
+        background-clip: padding-box;
+        text-align: center;
+    }
+
+    .button {
+        font-family: Helvetica, Arial, sans-serif;
+        font-size: 13px;
+        padding: 5px 10px;
+        border: 1px solid #aaa;
+        background-color: #eee;
+        background-image: linear-gradient(top, #fff, #f0f0f0);
+        border-radius: 2px;
+        box-shadow: 0 1px 3px rgba(0,0,0,0.15);
+        color: #666;
+        text-decoration: none;
+        text-shadow: 0 1px 0 #fff;
+        cursor: pointer;
+        transition: all 0.2s ease-out;
+    }
+
+        .button:hover {
+            border-color: #999;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.25);
+        }
+
+        .button:active {
+            box-shadow: 0 1px 3px rgba(0,0,0,0.25) inset;
+        }
+
+    .overlay {
+        visibility: hidden;
+        opacity: 0;
+        position: absolute;
+        display: flow;
+        top: 0;
+        bottom: -300px;
+        left: 0;
+        right: 0;
+        height: 1200px;
+        background: rgba(0,0,0,0.5);
+        transition: opacity 200ms;
+    }
+
+    .light {
+        background: rgba(255,255,255,0.5);
+    }
+
+    .cancel {
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        cursor: default;
+    }
+
+    /*:target {
+                                                    visibility: visible;
+                                                    opacity: 1;
+                                                }*/
+
+    .popup {
+        margin-left: 485px;
+        margin-top: 350px;
+        padding: 20px;
+        background: #fff;
+        border: 1px solid #666;
+        height: 400px;
+        width: 550px;
+        box-shadow: 0 0 50px rgba(0,0,0,0.5);
+        position: relative;
+    }
+
+    .close {
+        position: absolute;
+        width: 20px;
+        height: 20px;
+        top: 20px;
+        right: 20px;
+        opacity: 0.8;
+        transition: all 200ms;
+        font-size: 24px;
+        font-weight: bold;
+        text-decoration: none;
+        color: #666;
+    }
+
+        .close:hover {
+            opacity: 1;
+        }
+
+    .content {
+        max-height: 400px;
+        overflow: auto;
+    }
+    /*-----------*/
+    @@import 'https://fonts.googleapis.com/css?family=Roboto';
+
+    .side-menu {
+        z-index: 1;
+        font-family: 'Roboto', sans-serif;
+        position: fixed;
+        top: 0;
+        left: 0;
+        margin: 0;
+        padding: 0;
+        height: 100%;
+        width: 60px;
+        list-style-type: none;
+        background: linear-gradient(green,lime,green,white);
+        overflow: hidden;
+        transition: width .3s;
+    }
+
+        .side-menu:hover {
+            width: 300px;
+        }
+
+        .side-menu li {
+            width: 300px;
+        }
+
+            .side-menu li span {
+                font-size: 1rem;
+                margin: 20px 30px 0 22px;
+            }
+
+            .side-menu li a {
+                display: block;
+                font-size: .9rem;
+                text-decoration: none;
+                color: #FFF;
+                height: 60px;
+            }
+
+                .side-menu li a:hover {
+                    background: #14081d;
+                    display: block;
+                }
+</style>
+
+@*@model OnlineShop.Models.Users*@
+
+@*@if (User.IsInRole("Admin"))
+{
+    <form method="get" asp-action="Go">
+        <input type="text" hidden name="id" value="@ViewBag.Id">
+        <button type="submit">Go to Admin Panel</button>
+    </form>
+    <form method="get" asp-action="logout">
+        <button type="submit">Logout</button>
+    </form>
+}*@
+<ul class="side-menu" onmouseover="showOs()" onmouseout="hideOs()">
+    <center><h1 id="OS">OS</h1></center>
+    @if (ViewBag.User != null)
+    {
+        @if (ViewBag.User.Id == 1)
+        {
+            <form method="get" style="padding:0; margin:0;">
+            <li><a asp-controller="AdminPanel" asp-action="ProductList"><span class="fa fa-code"></span>Admin Panel</a></li>
+            </form>
+        }
+        <form method="get" style="padding:0; margin:0;">
+        <li><a asp-controller="Home" asp-action="Index"><span class="fa fa-shopping-bag"></span>Shop</a></li>
+        </form>
+        <form method="get" style="padding:0; margin:0;">
+        <li><a asp-controller="Cart" asp-action="CartList"><span class="fa fa-shopping-cart"></span>Cart</a></li>
+        </form>
+        <form method="get" style="padding:0; margin:0;">
+        <li><a asp-action="logout"><span class="fa fa-sign-out"></span>Logout</a></li>
+        </form>
+    }
+    else
+    {
+        <form method="get" style="padding:0; margin:0;">
+        <li><a asp-controller="Home" asp-action="Index"><span class="fa fa-shopping-bag"></span>Shop</a></li>
+        </form>
+        <form method="get" style="padding:0; margin:0;">
+        <li><a asp-action="LoginRegister"><span class="fa fa-user"></span>Register/Login</a></li>
+        </form>
+    }
+</ul>
+<script>
+    function hideOs() {
+        document.getElementById("OS").innerText = "OS";
+    }
+    function showOs() {
+        document.getElementById("OS").innerText = "Online Shop";
+    }
+</script>
+@*<div class="search">
+
+    <h1>Search</h1>
+    <select id="fastsearch">
+        @foreach (var item in ViewBag.categ)
+        {
+            <option>@item.CategName</option>
+        }
+    </select>
+    <input name="searcher" style="height:25px; width:300px" type="text" placeholder="Search" />
+</div>*@
+<div class="container">
+    <div class="row">
+        <div class="col-md-12">
+            <h2>All <b>Products</b></h2>
+            <div id="myCarousel" class="carousel slide" data-ride="carousel" data-interval="0">
+                <!-- Carousel indicators -->
+                <ol class="carousel-indicators">
+                    @for (int i = 0; i < ViewBag.PageAmount; i++)
+                    {
+                        if (i == 0)
+                        {
+                            <li data-target="#myCarousel" data-slide-to="@i" class="active"></li>
+                        }
+                        else
+                        {
+                            <li data-target="#myCarousel" data-slide-to="@i"></li>
+                        }
+                    }
+                </ol>
+                <!-- Wrapper for carousel items -->
+                <div class="carousel-inner">
+                    @for (int i = 0; i < ViewBag.PageAmount; i++)
+                    {
+                        if (i == 0)
+                        {
+                            <div class="item active">
+                                <div class="row">
+                                    @for (int j = 0; j < 8; j++)
+                                    {
+                                        @if (ViewBag.products[i, j] != null)
+                                        {
+                                            <div class="col-sm-3">
+                                                <div class="thumb-wrapper">
+                                                    @*<span class="wish-icon"><i class="fa fa-heart-o"></i></span>*@
+                                                    <div class="img-box">
+                                                        <img class="img-responsive" src="@ViewBag.products[i, j].HttpPathImg" />
+                                                    </div>
+                                                    <div class="thumb-content">
+                                                        <form method="post">
+                                                            <a asp-action="ShowProduct" asp-route-Id="@ViewBag.products[i, j].Id">
+                                                                <h4>@ViewBag.products[i,j].ProdName</h4>
+                                                                <div class="star-rating">
+                                                                    <ul class="list-inline">
+                                                                        <li class="list-inline-item"><i class="fa fa-star"></i></li>
+                                                                        <li class="list-inline-item"><i class="fa fa-star"></i></li>
+                                                                        <li class="list-inline-item"><i class="fa fa-star"></i></li>
+                                                                        <li class="list-inline-item"><i class="fa fa-star"></i></li>
+                                                                        <li class="list-inline-item"><i class="fa fa-star-o"></i></li>
+                                                                    </ul>
+                                                                </div>
+                                                                <p class="item-price"><strike>$@ViewBag.cutprice[i,j]</strike> <b>$@ViewBag.products[i,j].Price</b></p>
+                                                            </a>
+                                                        </form>
+                                                        @if(ViewBag.User != null){
+                                                            <button class="btn btn-primary" onclick="AddCartCookie(@ViewBag.products[i,j].Id)">Add to Cart</button>
+                                                        }
+                                                        else{
+                                                            <form method="get" asp-action="LoginRegister" style="margin:0; padding:0;">
+                                                                <button class="btn btn-primary">Add to Cart</button>
+                                                            </form>
+                                                        }
+                                                        @*<a class="btn btn-primary button" onclick="showprod(@ViewBag.products[i,j].Id)">Add to Cart</a>*@
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            @*var Id = $"popup1{@ViewBag.products[i, j].Id}";
+                            <div id=$"@Id" class="overlay">
+                            <div class="popup">
+                            <h2 id="prodname">Info box</h2>
+                            <p id="description">description</p>
+                            <a class="close" onclick="closePopup(@ViewBag.products[i,j].Id)">&times;</a>
+                            <div class="content">
+                            <p>Hello!</p>
+                            </div>
+                            </div>
+                            </div>*@
+                                        }
+                                        else
+                                        {
+                                            break;
+                                        }
+                                    }
+                                </div>
+                            </div>
+                        }
+                        else
+                        {
+                            <div class="item">
+                                <div class="row">
+                                    @for (int j = 0; j < 8; j++)
+                                    {
+                                        @if (ViewBag.products[i, j] != null)
+                                        {
+                                            <div class="col-sm-3">
+
+                                                <div class="thumb-wrapper">
+                                                    @*<span class="wish-icon"><i class="fa fa-heart-o"></i></span>*@
+                                                    <div class="img-box">
+                                                        <img class="img-responsive" src="@ViewBag.products[i, j].HttpPathImg" />
+                                                    </div>
+                                                    <div class="thumb-content">
+                                                        <form method="get">
+                                                            <a asp-action="ShowProduct" asp-route-Id="@ViewBag.products[i, j].Id">
+                                                                <h4>@ViewBag.products[i,j].ProdName</h4>
+                                                                <div class="star-rating">
+                                                                    <ul class="list-inline">
+                                                                        <li class="list-inline-item"><i class="fa fa-star"></i></li>
+                                                                        <li class="list-inline-item"><i class="fa fa-star"></i></li>
+                                                                        <li class="list-inline-item"><i class="fa fa-star"></i></li>
+                                                                        <li class="list-inline-item"><i class="fa fa-star"></i></li>
+                                                                        <li class="list-inline-item"><i class="fa fa-star-o"></i></li>
+                                                                    </ul>
+                                                                </div>
+                                                                <p class="item-price"><strike>$@ViewBag.cutprice[i,j]</strike> <b>$@ViewBag.products[i,j].Price</b></p>
+                                                            </a>
+                                                        </form>
+                                                        @if (ViewBag.User != null)
+                                                        {
+                                                            <button class="btn btn-primary" onclick="AddCartCookie(@ViewBag.products[i,j].Id)">Add to Cart</button>
+                                                        }
+                                                        else
+                                                        {
+                                                            <form method="get" asp-action="LoginRegister" style="margin:0; padding:0;">
+                                                                <button class="btn btn-primary">Add to Cart</button>
+                                                            </form>
+                                                        }
+                                                    </div>
+                                                </div>
+
+                                            </div>
+                                        }
+                                        else
+                                        {
+                                            break;
+                                        }
+                                    }
+                                </div>
+                            </div>
+                        }
+                    }
+                </div>
+                <!-- Carousel controls -->
+                <a class="carousel-control left" href="#myCarousel" data-slide="prev">
+                    <i class="fa fa-angle-left"></i>
+                </a>
+                <a class="carousel-control right" href="#myCarousel" data-slide="next">
+                    <i class="fa fa-angle-right"></i>
+                </a>
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+    console.log(document.cookie);
+    function AddCartCookie(id) {
+        var obj = { ProdId: id, Amount: 1 };
+        var cart = getCookie(`Cart${@ViewBag.Id}`);
+        if (cart != undefined) {
+            cart = JSON.parse(cart);
+
+            cart.push(obj);
+        }
+        else {
+            cart = [];
+            cart.push(obj);
+        }
+        var str = JSON.stringify(cart);
+        var path = `Cart${@ViewBag.Id}`;
+        setCookie(path, str, { "max-age": 3600 * 3 });
+    }
+    //GET COOKIE
+    function getCookie(name) {
+        let matches = document.cookie.match(
+            new RegExp(
+                "(?:^|; )" +
+                name.replace(/([\.$?*|{}\(\)\[\]\\\/\+^])/g, "\\$1") +
+                "=([^;]*)"
+            )
+        );
+        return matches ? decodeURIComponent(matches[1]) : undefined;
+    }
+
+    //SET COOKIE
+    function setCookie(name, value, options = {}) {
+        options = {
+            path: "/",
+            // for importnant add other values auto
+            ...options,
+        };
+
+        if (options.expires instanceof Date) {
+            options.expires = options.expires.toUTCString();
+        }
+
+        let updatedCookie =
+            encodeURIComponent(name) + "=" + encodeURIComponent(value);
+
+        for (let optionKey in options) {
+            updatedCookie += "; " + optionKey;
+            let optionValue = options[optionKey];
+            if (optionValue !== true) {
+                updatedCookie += "=" + optionValue;
+            }
+        }
+        document.cookie = updatedCookie;
+    }
+</script>
+<script>
+    $(document).ready(function () {
+        $(".wish-icon i").click(function () {
+            $(this).toggleClass("fa-heart fa-heart-o");
+        });
+    });
+</script>
